@@ -1,0 +1,15 @@
+{
+ "manifest_version": 2,
+ "name": "Skimmer",
+ "version": 0.1,
+ "description": "Block useless spam from your search results on DDG and Google",
+
+ "icons": {
+   "48": "icons/border-48.jpg"
+ },
+ "content_scripts": [
+
+	 "matches": ["*://*.duckduckgo.com/*", "*://*.google.*/*"],
+	 "js": ["skimmer.js"]
+ ]
+}
