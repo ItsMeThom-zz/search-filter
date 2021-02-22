@@ -37,11 +37,6 @@ function filterResults(mutationsList) {
         });
 }
 
-const getDomainCallback = (domain) => {
-    /* Returns an anonymous callback fn, with a callback to add a domain to a filter. */
-    return function (domain) { addDomainToFilter(domain); };
-};
-
 function addBlacklistButton(elem) {
     //add a button to allow filtering
     let filterBtn = document.createElement('a');
