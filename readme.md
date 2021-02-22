@@ -10,3 +10,7 @@ TODO:
   * improve CSS for collapsed elements containing filtered results
   * add option to hide/show filtered elements in the results
   * write brief explaning the why and how
+
+
+
+
