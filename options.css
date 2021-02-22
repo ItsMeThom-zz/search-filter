@@ -1,0 +1,19 @@
+.pad15 {
+ padding-left: 15px;
+ padding-top: 15px;
+}
+
+.vert-spacer {
+    height: 20px;
+    width: 100%
+}
+
+.remove {
+    text-align: center;
+}
+
+.flat-list {
+    list-style-type:none; 
+    margin: 0; 
+    padding: 1em 2em;
+}
