@@ -9,10 +9,15 @@
 				"*://*.duckduckgo.com/*"
 			],
 			"js": [
-				"filter.js"
+				"filter.js",
+				"util.js"
 			]
 		}
 	],
+	"options_ui": {
+		"page": "options.html",
+		"browser_style": true
+	},
 	"permissions": [
 		"*://*.duckduckgo.com/*",
 		"storage"

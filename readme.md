@@ -12,5 +12,8 @@ TODO:
   * write brief explaning the why and how
 
 
-
+How to run in dev mode:
+* Go to `about:debugging#/runtime/this-firefox`
+* Click 'Load Temporary Addon' and select any file in the filter/ directory.
+* Hit reload to update changes in the browser when changing code.
 
