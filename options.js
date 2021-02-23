@@ -1,36 +1,30 @@
-browser.storage.local.get('filteredDomains')
-    .then((storedData) => {
-        if (!storedData.filteredDomains) {
-            storedData.filteredDomains = [];
-        }
-        let storedBlacklist = storedData.filteredDomains;
-        let list = document.querySelector('#blacklist');
-        for (let domain of storedBlacklist) {
-            // Create the list item:
-            let listItem = document.createElement('li');
-            let removeButton = document.createElement('button');
-            removeButton.innerHTML = "Remove";
-            removeButton.onclick = getBlacklistRemoveCallback(domain);
-            removeButton.classList.add("remove");
-            // Set its contents:
-            listItem.appendChild(removeButton);
-            listItem.appendChild(document.createTextNode(domain));
+let storedData = browser.storage.local.get();
+storedData.then(data => {
+    let showFilteredResults = getOptionsOrDefault(data);
+    let filteredDomains = getBlacklistOrDefault(data);
 
-            // Add it to the list:
-            list.appendChild(listItem);
-        }
+    let list = document.querySelector('#blacklist');
+    for (let domain of filteredDomains) {
+        // Create the list item:
+        let listItem = document.createElement('li');
+        let removeButton = document.createElement('button');
+        removeButton.innerHTML = "Remove";
+        removeButton.onclick = getBlacklistRemoveCallback(domain);
+        removeButton.classList.add("remove");
+        // Set its contents:
+        listItem.appendChild(removeButton);
+        listItem.appendChild(document.createTextNode(domain));
 
+        // Add it to the list:
+        list.appendChild(listItem);
+    }
+
+    let checkShowFilteredResults = document.querySelector('#checkShowFiltered');
+    checkShowFilteredResults.checked = showFilteredResults;
+    checkShowFilteredResults.addEventListener('change', (event) => {
+        storeShowFilteredOption();
     });
-
-function setOptionsShowFilteredCheckbox() {
-    browser.storage.local.get('showFilteredResults').then((storedData) => {
-        if (!storedData.showFilteredResults) {
-            storedData.showFilteredResults = true;
-        }
-        let checkbox = document.querySelector('#checkShowFiltered');
-        checkbox.attributes.checked = storedData.showFilteredResults;
-    });
-}
+});
 
 function storeShowFilteredOption() {
     let checkbox = document.querySelector('#checkShowFiltered');
@@ -58,4 +52,20 @@ function removeItemFromBlacklist(domain) {
                 "filteredDomains": blacklist
             });
         });
+}
+
+function getOptionsOrDefault(data) {
+    /* Return "Show Filtered Results on Page or default (true)" */
+    if (data.showFilteredResults === null) {
+        return true;
+    }
+    return data.showFilteredResults;
+}
+
+function getBlacklistOrDefault(data) {
+    /* Return stored blacklist of domain or empty array [] */
+    if (!data.filteredDomains) {
+        return [];
+    }
+    return data.filteredDomains;
 }
